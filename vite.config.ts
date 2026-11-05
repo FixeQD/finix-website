@@ -30,8 +30,9 @@ function seo(siteUrl: string): Plugin {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', ['SITE_URL', 'VITE_']);
+  const env = loadEnv(mode, '.', ['SITE_URL', 'BASE_PATH', 'VITE_']);
   return {
+    base: env.BASE_PATH || '/',
     plugins: [svelte(), seo(env.SITE_URL ?? '')],
     build: {
       target: 'es2022',

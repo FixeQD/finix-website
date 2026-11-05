@@ -10,10 +10,12 @@ let html = await readFile(file, 'utf8');
 if (!html.includes('<div id="app"></div>')) throw new Error(`${file}: no empty #app to fill`);
 
 // Preload the two fonts that draw the headline (LCP); the rest load on demand via unicode-range.
+// The base path (GitHub Pages project sites) comes in via BASE_PATH, same key the build used.
+const base = process.env.BASE_PATH ?? '/';
 const assets = await readdir('dist/assets');
 const preloads = assets
   .filter((n) => /caveat-latin-(600|700)-normal.*woff2/.test(n))
-  .map((n) => `<link rel="preload" href="/assets/${n}" as="font" type="font/woff2" crossorigin>`)
+  .map((n) => `<link rel="preload" href="${base}assets/${n}" as="font" type="font/woff2" crossorigin>`)
   .join('\n');
 html = html.replace('</head>', () => `${preloads}\n</head>`);
 
