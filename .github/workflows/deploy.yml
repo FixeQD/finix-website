@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BASE_PATH: /${{ github.event.repository.name }}/
-      SITE_URL: https://finix.fixeq.me
+      SITE_URL: https://ghp.fixeq.dev
     steps:
       - uses: actions/checkout@v7
 
