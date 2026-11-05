@@ -1,0 +1,21 @@
+/* Reveal on scroll. Hidden state only exists under .js, so the page works without JavaScript. */
+.js .rv {
+  opacity: 0;
+  transform: translateY(34px) rotate(calc(var(--r, 0deg) + 1.6deg)) scale(0.985);
+  transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.js .rv.in { opacity: 1; transform: rotate(var(--r, 0deg)); }
+.rv:not(.js *) { transform: rotate(var(--r, 0deg)); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, ::before, ::after { transition: none !important; animation: none !important; }
+  .js .rv { opacity: 1; transform: rotate(var(--r, 0deg)); }
+  .hl { background-size: 100% 100%; }
+  .scribble::after { clip-path: none; }
+  .check li.done b::after { transform: rotate(-1.5deg) scaleX(1); }
+  .swap { width: var(--w-new, auto); }
+  .swap-old { opacity: 0; }
+  .swap-new { clip-path: none; }
+}

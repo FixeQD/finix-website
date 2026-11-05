@@ -1,0 +1,91 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 17px/1.65 var(--text);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+main { padding: 0 16px; }
+a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+a:hover { text-decoration-style: wavy; }
+img { max-width: 100%; height: auto; }
+svg use { pointer-events: none; }
+:focus-visible { outline: 2.5px dashed var(--blue); outline-offset: 3px; }
+
+kbd {
+  font: 13px var(--mono);
+  border: 1.5px solid var(--ink);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: var(--paper-2);
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+code { font: 14.5px var(--mono); background: var(--hl); border-radius: 4px; padding: 1px 6px; }
+
+/* Every content box is a piece of paper: same outline, same hard shadow. */
+.code, .dl, .ghost, .float-dl, .nav-dl {
+  border: 2px solid var(--ink);
+  border-radius: var(--wob);
+}
+
+/* Highlighter that sweeps in when the section enters the viewport (.in), plus inline marks. */
+.hl {
+  --c: var(--hl);
+  padding: 0 8px;
+  background: linear-gradient(176deg, transparent 52%, var(--c) 53%, var(--c) 88%, transparent 90%) 0 0 / 0% 100% no-repeat;
+  transition: background-size 0.9s 0.25s var(--ease);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.in .hl, .in.hl { background-size: 100% 100%; }
+.hl-blue { --c: var(--hl-blue); } .hl-pink { --c: var(--hl-pink); }
+.hl-green { --c: var(--hl-green); } .hl-orange { --c: var(--hl-orange); }
+.hl-yellow { --c: var(--hl); } .hl-cyan { --c: var(--hl-cyan); }
+
+mark {
+  --c: var(--hl);
+  color: inherit;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: linear-gradient(104deg, transparent 2%, var(--c) 4%, var(--c) 96%, transparent 98%);
+}
+mark.m-blue { --c: var(--hl-blue); } mark.m-green { --c: var(--hl-green); } mark.m-orange { --c: var(--hl-orange); }
+
+.scribble { position: relative; display: inline-block; white-space: nowrap; }
+.scribble::after {
+  content: '';
+  position: absolute; left: -4%; right: -4%; bottom: -4px;
+  height: 0.16em; min-height: 12px;
+  background: var(--red);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 12 C 60 4, 120 16, 180 9 S 270 6, 297 11' fill='none' stroke='black' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") 50% / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M3 12 C 60 4, 120 16, 180 9 S 270 6, 297 11' fill='none' stroke='black' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") 50% / 100% 100% no-repeat;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s 0.5s var(--ease);
+}
+.in .scribble::after, .scribble.in::after, .in.scribble::after { clip-path: inset(0); }
+
+/* Washi tape pinned over prints. */
+.tape {
+  position: absolute; top: -12px; z-index: 2;
+  width: 110px; height: 30px;
+  background: var(--tape);
+  box-shadow: 0 1px 2px #00000014;
+}
+.tape.tl { left: 26px; transform: rotate(-5deg); }
+
+/* Things that are always light paper, in either theme: pastel notes, pinned drawings, solid yellow buttons.
+   They reset the colour tokens to their light values so their text and outlines stay readable on the dark board.
+   Add this class (or the selector) to any new element with a pastel or white fill. */
+.on-paper, .cm-note, .dl-main, .nav-dl, .float-dl, .inst-path {
+  --ink: #2a2620; --pencil: #6f6857; --blue: #2f5bd3; --red: #cf402a; --green: #2f9e5b;
+  --paper-2: #fff; --on-red: #fff;
+  color: var(--ink);
+}

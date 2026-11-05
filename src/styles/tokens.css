@@ -1,0 +1,97 @@
+/* Design tokens. See references/design-system.md and references/dark-theme.md.
+   Light = ink on paper. Dark = chalk on a blackboard (not an inverted page).
+   Keep the dark block and the prefers-color-scheme copy in sync. */
+:root {
+  --paper: #fcfaf5;
+  --paper-2: #fff;
+  --ink: #2a2620;
+  --pencil: #6f6857;
+  --faint: #d8d1c1;
+
+  --blue: #3f63b8; /* Nix blue, 5.4:1 on paper */
+  --red: #cf402a;
+  --green: #2f9e5b;
+
+  --hl: #ffde59bf;
+  --hl-pink: #ff92ba99;
+  --hl-green: #8ce296a6;
+  --hl-orange: #ffb2669e;
+  --hl-cyan: #6ed6e68c;
+  --hl-blue: #8cbeff80;
+
+  /* sticky notes and tape are physical paper: same in both themes */
+  --note-yellow: #fff3a8;
+  --tape: #ffeca0b3;
+
+  --grid: #6ea0d214;
+  --shadow: #2a2620cc;
+  --drop: #2a262080;                 /* soft shadow under the sticky header */
+
+  --cta: #ffde59;                    /* solid yellow for filled buttons (the translucent --hl is for text marks) */
+  --on-red: #fff;                    /* text on red badges */
+  --hover-tint: color-mix(in srgb, var(--note-yellow) 50%, white);
+
+  --hand: 'Caveat', 'Comic Sans MS', cursive;
+  --text: 'Shantell Sans Variable', 'Comic Sans MS', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --wob: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  color-scheme: light;
+}
+
+/* Dark: chalkboard. Explicit choice (toggle) */
+:root[data-theme='dark'] {
+  --paper: #1d2320;
+  --paper-2: #262d29;
+  --ink: #f3eedf;
+  --pencil: #a9a898;
+  --faint: #3d4640;
+
+  --blue: #8db4ff;
+  --red: #ff7a5c;
+  --green: #6fdc9a;
+
+  --hl: #ffde5961;
+  --hl-pink: #ff92ba5c;
+  --hl-green: #8ce29659;
+  --hl-orange: #ffb2665c;
+  --hl-cyan: #6ed6e65c;
+  --hl-blue: #8cbeff66;
+
+  --grid: #ffffff0d;
+  --shadow: #000000b3;
+  --drop: #00000080;
+  --on-red: #2a2620;
+  --hover-tint: #ffde5924;
+  color-scheme: dark;
+}
+
+/* Dark: follow the system when the visitor has not chosen */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #1d2320;
+    --paper-2: #262d29;
+    --ink: #f3eedf;
+    --pencil: #a9a898;
+    --faint: #3d4640;
+
+    --blue: #8db4ff;
+    --red: #ff7a5c;
+    --green: #6fdc9a;
+
+    --hl: #ffde5961;
+    --hl-pink: #ff92ba5c;
+    --hl-green: #8ce29659;
+    --hl-orange: #ffb2665c;
+    --hl-cyan: #6ed6e65c;
+    --hl-blue: #8cbeff66;
+
+    --grid: #ffffff0d;
+    --shadow: #000000b3;
+    --drop: #00000080;
+    --on-red: #2a2620;
+    --hover-tint: #ffde5924;
+    color-scheme: dark;
+  }
+}

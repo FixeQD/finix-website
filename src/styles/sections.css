@@ -1,0 +1,10 @@
+/* Chapter structure and the plain article sections. Component pieces live next to their components' rules. */
+.chapter { max-width: 1320px; margin: 0 auto; padding: clamp(100px, 12vw, 160px) 0 0; }
+.chapter-head { max-width: 920px; margin: 0 auto clamp(30px, 5vw, 56px); text-align: center; }
+.chapter-no { display: inline-block; margin-bottom: 10px; font: 700 25px/1 var(--hand); color: var(--red); transform: rotate(-3deg); }
+h2 { margin: 0 0 16px; font: 700 clamp(38px, 5.2vw, 62px) / 1.05 var(--hand); }
+.chapter-head p { margin: 0; font-size: clamp(17px, 1.9vw, 20px); }
+
+/* The two non-chapter sections: install and FAQ share this article frame. */
+.readme { max-width: 1080px; margin: 0 auto; padding: clamp(100px, 12vw, 150px) 0 0; }
+.readme > h2 { text-align: center; }

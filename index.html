@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fcfaf5" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Apply a saved theme before first paint (no flash). No saved choice: CSS follows the system.
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.dataset.theme = t;
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'dark' ? '#1d2320' : '#fcfaf5');
+        }
+      } catch (e) {}
+    </script>
+    <title>finix: a Nix based Linux distribution with finit instead of systemd</title>
+    <meta name="description" content="Finix is an experimental Linux distribution built around Nix, with finit as pid 1. Define your system in your own flake, import only the modules you need, and pull more from community-modules." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="finix community" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="finix" />
+    <meta property="og:title" content="finix: Nix, but with finit" />
+    <meta property="og:description" content="An experimental Linux distribution around Nix, with finit as pid 1. Define your system in your own flake, import only the modules you need, and pull more from community-modules." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="finix: Nix, but with finit" />
+    <meta name="twitter:description" content="An experimental Linux distribution around Nix, with finit as pid 1. Define your system in your own flake, import only the modules you need, and pull more from community-modules." />
+    <link rel="icon" type="image/svg+xml" href="/img/icon.svg" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

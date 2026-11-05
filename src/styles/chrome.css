@@ -1,0 +1,74 @@
+/* Progress bar, sticky header, floating download */
+.progress { position: fixed; inset: 0 0 auto; height: 4px; z-index: 60; pointer-events: none; }
+.progress span {
+  display: block; width: 100%; height: 100%;
+  background: var(--red); opacity: 0.85; border-radius: 0 3px 3px 0;
+  transform-origin: 0; transform: scaleX(var(--p, 0));
+}
+
+.top {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 10px max(16px, 50% - 620px);
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 2px dashed var(--faint);
+  transition: box-shadow 0.3s;
+}
+.scrolled .top { box-shadow: 0 6px 18px -14px var(--drop); }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 30px/1 var(--hand); color: var(--ink); text-decoration: none; }
+.brand img { border-radius: 8px; transition: transform 0.4s var(--ease); }
+.brand:hover img { transform: rotate(-10deg) scale(1.06); }
+.top nav { display: flex; align-items: center; gap: 4px; }
+.top nav a { padding: 4px 10px; border-radius: 12px; font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.top nav a:not(.nav-dl):hover { background: var(--hl); }
+.nav-dl {
+  display: inline-flex !important; align-items: center; gap: 6px; margin-left: 6px;
+  font-weight: 700 !important; background: var(--cta);
+  box-shadow: 2px 3px 0 var(--shadow);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.nav-dl svg { width: 18px; height: 18px; }
+.nav-dl:hover { box-shadow: 3px 4px 0 var(--shadow); transform: translate(-1px, -1px) rotate(-1deg); }
+.theme-toggle {
+  display: grid; place-items: center; width: 36px; height: 36px; margin-left: 6px; padding: 0;
+  color: var(--ink); background: var(--paper-2); cursor: pointer;
+  border: 2px solid var(--ink); border-radius: 12px 4px 14px 5px;
+  box-shadow: 2px 3px 0 var(--shadow);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle:hover { box-shadow: 3px 4px 0 var(--shadow); transform: translate(-1px, -1px) rotate(-6deg); }
+.theme-toggle:active { box-shadow: 1px 1px 0 var(--shadow); transform: translate(1px, 1px); }
+.theme-toggle svg.flip { animation: tt-flip 0.45s var(--ease); }
+@keyframes tt-flip { from { transform: rotate(-130deg) scale(0.8); } }
+
+/* Theme change: an ink wash pouring from the toggle. Delays and durations are per element
+   (set inline by ThemeToggle), so the colour front stays irregular. The class lives on the
+   root only for the moment of the swap; nothing transitions in normal use. */
+html.theme-morph, html.theme-morph body, html.theme-morph body *, html.theme-morph body *::before, html.theme-morph body *::after {
+  transition-delay: var(--morph-delay, 0ms);
+  transition-duration: var(--morph-dur, 0.45s);
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-timing-function: var(--ease);
+}
+@media (max-width: 1080px) { .top nav a:not(.nav-dl) { display: none; } }
+@media (max-width: 480px) { .brand { font-size: 26px; } }
+
+.float-dl {
+  position: fixed; z-index: 40; bottom: 18px; right: max(16px, 50% - 620px);
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px 8px 10px;
+  background: var(--cta); color: var(--ink); text-decoration: none;
+  box-shadow: 3px 4px 0 var(--shadow);
+  opacity: 0; transform: translateY(140%) rotate(2deg);
+  transition: transform 0.45s var(--ease), opacity 0.3s;
+}
+.float-dl.show { opacity: 1; transform: none; }
+.float-dl:hover { text-decoration: none; transform: translateY(-2px) rotate(-1deg); }
+.float-dl img { border-radius: 7px; }
+.float-dl > span { display: flex; flex-direction: column; line-height: 1.2; }
+.float-dl b { font-size: 16px; }
+.float-dl small { font-size: 12.5px; color: #2a2620bf; }
+.float-dl svg { width: 22px; height: 22px; }
+@media (max-width: 560px) { .float-dl { left: 16px; right: 16px; justify-content: center; } }
